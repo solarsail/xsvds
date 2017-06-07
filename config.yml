@@ -1,0 +1,13 @@
+xs:
+    ip: 192.168.100.253
+    username: root
+    password: "123456"
+
+ldap:
+    ip: 192.168.100.192
+    port: 389
+    ou: some_ou
+    dc: some_dc
+
+token:
+    secret: ag5GaKL0CVmFI7t7x0xGaqdbRYf3JCdCXPc04OQsjV8=
