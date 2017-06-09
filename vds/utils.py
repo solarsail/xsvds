@@ -15,20 +15,26 @@ class Logger(object):
     """Middleware class for request/response logging."""
     def process_request(self, req, resp):
         """Logs incoming requests.
-        
+
         Args:
             see falcon documentation.
         """
+        if req.path == '/v1/heartbeat':
+            return
+
         rid = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8)) # a random request id
         req.context['_rid'] = rid
-        log.info("**REQUEST**  [{}] from: [{}], content: {}".format(rid, req.remote_addr, req.context['doc']))
+        log.info("**REQUEST**  [{}] from: [{}], route: {}, content: {}".format(rid, req.remote_addr, req.path, req.context['doc']))
 
     def process_response(self, req, resp, resource, req_succeeded):
         """Logs responses.
-        
+
         Args:
             see falcon documentation.
         """
+        if req.path == '/v1/heartbeat':
+            return
+
         # `resp.body` is not translated from `context` yet if no exception is raised.
         content = resp.context['result'] if req_succeeded else resp.body
         log.info("**RESPONSE** [{}] content: {}, succeeded: {}".format(
@@ -39,7 +45,7 @@ class RequireAuth(object):
     """Middleware class for token validation."""
     def process_resource(self, req, resp, resource, params):
         """Validates the token and insert the payload into the request.
-        
+
         Args:
             see falcon documentation.
         """
@@ -59,7 +65,7 @@ class RequireJSON(object):
 
     def process_request(self, req, resp):
         """Validates the request content.
-        
+
         Args:
             see falcon documentation.
         """
@@ -74,7 +80,7 @@ class JSONTranslator(object):
 
     def process_request(self, req, resp):
         """Translates the request content into JSON and insert into the request.
-        
+
         Args:
             see falcon documentation.
         """
@@ -103,7 +109,7 @@ class JSONTranslator(object):
 
     def process_response(self, req, resp, resource):
         """Translates the response content into JSON and makes the response body.
-        
+
         Args:
             see falcon documentation.
         """
@@ -114,7 +120,7 @@ class JSONTranslator(object):
 
 def handle_vds_exception(ex, req, resp, params):
     """Handle all VDSError exceptions that are not caught.
-    
+
     Convert VDSErrors to HTTPErrors which are used by falcon to produce responses.
 
     Raises:

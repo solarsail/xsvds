@@ -27,11 +27,13 @@ try:
     # normal routes
     app.add_route("/v1/login", api.login)
     app.add_route("/v1/conn", api.connect)
+    app.add_route("/v1/heartbeat", api.heartbeat)
 except VDSError as e:
     log.exception(e)
     # failsafe routes
     app.add_route("/v1/login", api.failsafe)
     app.add_route("/v1/conn", api.failsafe)
+    app.add_route("/v1/heartbeat", api.failsafe)
 
 
 
