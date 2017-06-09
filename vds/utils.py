@@ -21,7 +21,7 @@ class Logger(object):
         """
         rid = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8)) # a random request id
         req.context['_rid'] = rid
-        log.info("REQUEST  [{}] from: [{}], content: {}".format(rid, req.remote_addr, req.context['doc']))
+        log.info("**REQUEST**  [{}] from: [{}], content: {}".format(rid, req.remote_addr, req.context['doc']))
 
     def process_response(self, req, resp, resource, req_succeeded):
         """Logs responses.
@@ -31,7 +31,7 @@ class Logger(object):
         """
         # `resp.body` is not translated from `context` yet if no exception is raised.
         content = resp.context['result'] if req_succeeded else resp.body
-        log.info("RESPONSE [{}] content: {}, succeeded: {}".format(
+        log.info("**RESPONSE** [{}] content: {}, succeeded: {}".format(
             req.context['_rid'], content, req_succeeded))
 
 

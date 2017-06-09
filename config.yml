@@ -4,10 +4,9 @@ xs:
     password: "123456"
 
 ldap:
-    ip: 192.168.100.192
+    ip: 192.168.1.211
     port: 389
-    ou: some_ou
-    dc: some_dc
+    domain: xsvds.com
 
 token:
     secret: ag5GaKL0CVmFI7t7x0xGaqdbRYf3JCdCXPc04OQsjV8=

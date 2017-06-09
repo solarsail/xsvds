@@ -20,7 +20,7 @@ conf_xs = CONF['xs']
 conf_ldap = CONF['ldap']
 try:
     # initialize xenserver & ldap
-    ldap.init(conf_ldap['ip'], conf_ldap['port'], ou=conf_ldap['ou'], dc=conf_ldap['dc'])
+    ldap.init(conf_ldap['ip'], conf_ldap['port'], domain=conf_ldap['domain'])
     log.info("LDAP initalized.")
     xapi.init(conf_xs['ip'], conf_xs['username'], conf_xs['password'])
     log.info("XAPI initalized.")

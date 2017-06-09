@@ -28,7 +28,7 @@ def verify(token):
     try:
         data = _cipher.decrypt(token, ttl=_delta)
     except fernet.InvalidToken:
-        raise InvalidTokenError("Token corrupted.")
+        raise InvalidTokenError("Token corrupted or expired.")
 
     try:
         data = json.loads(data)
