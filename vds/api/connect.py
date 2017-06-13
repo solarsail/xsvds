@@ -16,21 +16,13 @@ class Connect(object):
         user = req.context['token']
         vm_id = data['vm_id']
 
-        try:
-            log.info("Attempt to start VM [{}] for user [{}]..".format(vm_id, user))
-            xapi.current_session().start_vm(vm_id)
-        except XapiOperationError as xoe:
-            # starting a running VM, log and ignore
-            log.info(xoe)
 
-        info = xapi.current_session().get_vm_info(vm_id)
-        log.info("Retrieved info of VM [{}].".format(vm_id))
 
         resp.status = falcon.HTTP_200
         resp.context['result'] = {
             vm_id: {
-                'rdp_ip': info['ip'],
-                'rdp_port': 3389
+                'rdp_ip': '192.168.1.52',
+                'rdp_port': 5903
             }
         }
 

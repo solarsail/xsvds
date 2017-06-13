@@ -15,25 +15,23 @@ class Login(object):
         username = data['username']
         password = data['password']
 
-        user_info = ldap.auth(username, password) # raises on failure
-        log.info("User [{}] logging in. ({})".format(username, user_info))
+        #user_info = ldap.auth(username, password) # raises on failure
+        #log.info("User [{}] logging in. ({})".format(username, user_info))
 
         t = token.issue(username)
         log.info("Token issued for user [{}].".format(username))
 
-        vms = xapi.current_session().get_vms_by_user(username)
-        log.info("VM info retrieved for user [{}], {} VM(s) in total.".format(username, len(vms)))
+        #vms = xapi.current_session().get_vms_by_user(username)
+        #log.info("VM info retrieved for user [{}], {} VM(s) in total.".format(username, len(vms)))
 
         info = {}
-        for i, vm in enumerate(vms):
-            log.debug("[{}] {}".format(i+1, vm))
-            info[vm['uuid']] = {
-                'name': vm['name'],
-                'status': vm['power_state'],
-                'public_ip': vm['ip'],
-                'os': vm['os']['distro'] if vm['os'] else 'unknown'
-            }
-
+        info['test1'] = {
+            'name': 'dummy test',
+            'status': 'ACTIVE',
+            'public_ip': '192.168.1.52',
+            'os': 'centos',
+            'protocol': 1
+        }
         resp.context['result'] = {
             'vms': info,
             'token': t
