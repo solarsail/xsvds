@@ -18,6 +18,8 @@ app.add_error_handler(VDSError, handle_vds_exception)
 
 conf_xs = CONF['xs']
 conf_ldap = CONF['ldap']
+
+app.add_route("/v1/settings", api.settings)
 try:
     # initialize xenserver & ldap
     ldap.init(conf_ldap['ip'], conf_ldap['port'], domain=conf_ldap['domain'])

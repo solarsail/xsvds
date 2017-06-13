@@ -43,14 +43,18 @@ class Logger(object):
 
 class RequireAuth(object):
     """Middleware class for token validation."""
+
+    exempts = ['login', 'settings']
+
     def process_resource(self, req, resp, resource, params):
         """Validates the token and insert the payload into the request.
 
         Args:
             see falcon documentation.
         """
-        if req.path == '/v1/login':
-            return
+        for item in RequireAuth.exempts:
+            if req.path.endswith(item):
+                return
 
         try:
             t = req.context['doc']['token'].encode('utf-8') # convert unicode to str
