@@ -42,7 +42,11 @@ class Logger(object):
 
 
 class RequireAuth(object):
-    """Middleware class for token validation."""
+    """Middleware class for token validation.
+    
+    Attributes:
+        exempts (list): suffixes of paths which do not require authentication.
+    """
 
     exempts = ['login', 'settings']
 
