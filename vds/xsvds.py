@@ -22,10 +22,10 @@ conf_ldap = CONF['ldap']
 app.add_route("/v1/settings", api.settings)
 try:
     # initialize xenserver & ldap
-    ldap.init(conf_ldap['ip'], conf_ldap['port'], domain=conf_ldap['domain'])
-    log.info("LDAP initalized.")
-    xapi.init(conf_xs['ip'], conf_xs['username'], conf_xs['password'])
-    log.info("XAPI initalized.")
+    #ldap.init(conf_ldap['ip'], conf_ldap['port'], domain=conf_ldap['domain'])
+    #log.info("LDAP initalized.")
+    #xapi.init(conf_xs['ip'], conf_xs['username'], conf_xs['password'])
+    #log.info("XAPI initalized.")
     # normal routes
     app.add_route("/v1/login", api.login)
     app.add_route("/v1/conn", api.connect)
