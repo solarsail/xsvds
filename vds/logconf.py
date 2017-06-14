@@ -14,12 +14,18 @@ conf_dict = {
             'level': logging.DEBUG,
             'formatter': 'simple',
             'stream': 'ext://sys.stdout'
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'level': logging.DEBUG,
+            'formatter': 'simple',
+            'filename': 'xsvds.log'
         }
     },
     'loggers': {
         'vds': {
             'level': logging.DEBUG,
-            'handlers': ['console']
+            'handlers': ['console', 'file']
         }
     }
 }
