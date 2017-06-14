@@ -19,6 +19,9 @@ app.add_error_handler(VDSError, handle_vds_exception)
 conf_xs = CONF['xs']
 conf_ldap = CONF['ldap']
 
+log.info("*****************************")
+log.info("*  Virtual Desktop Service  *")
+log.info("*****************************")
 app.add_route("/v1/settings", api.settings)
 try:
     # initialize xenserver & ldap
