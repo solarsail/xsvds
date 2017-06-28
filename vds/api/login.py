@@ -31,7 +31,8 @@ class Login(object):
                 'name': vm['name'],
                 'status': vm['power_state'],
                 'public_ip': vm['ip'],
-                'os': vm['os']['distro'] if vm['os'] else 'unknown'
+                'os': vm['os']['distro'] if vm['os'] else 'unknown',
+                'protocol': 0,
             }
 
         resp.context['result'] = {
