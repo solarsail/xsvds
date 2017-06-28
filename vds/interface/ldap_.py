@@ -38,11 +38,11 @@ def auth(username, password):
     try:
         _defs.ldap.simple_bind_s(username_full, password)
         r = _defs.ldap.search_s(_defs.base_dn, ldap.SCOPE_SUBTREE, search_filter)
-        _defs.ldap.unbind_s()
+        #_defs.ldap.unbind_s()
         return r
     except (ldap.CONNECT_ERROR, ldap.SERVER_DOWN) as e:
         raise LdapError(str(e))
     except ldap.LDAPError as e:
-        _defs.ldap.unbind_s()
+        #_defs.ldap.unbind_s()
         raise AuthError('Authentication failed: user={}, msg={}'.format(username, e))
 
